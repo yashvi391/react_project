@@ -1,0 +1,22 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - export NODE_OPTIONS=--max_old_space_size=4096
+      - npm i -g yarn
+      - yarn install
+      - aws configure set default.region ap-south-1
+    
+  build:
+    commands:
+      - yarn build
+      - set -e
+
+artifacts:
+  files:
+    - "**/*"
+
+  discard-paths: no
+
+  base-directory: dist
